@@ -1,0 +1,159 @@
+============================================================
+  2D WKB Tunnelling Correction Calculator
+  (MEP AND MAP)
+============================================================
+  Parallelisation: 8 workers
+
+Loading 2D PES from 2d_pes_grid//...
+  Grid: 20 x 20 = 400 points
+  d1 range: 0.950 – 2.000 Å
+  d2 range: 0.950 – 2.000 Å
+  Raw energy range: 0.0000 – 1.3573 eV
+
+Finding canonical minimum...
+  Canonical minimum at d1 = 1.0333, d2 = 1.0211 Å
+  E(canonical) = -0.0158 eV
+
+Finding tautomeric minimum...
+  Tautomeric minimum at d1 = 1.8990, d2 = 1.5964 Å
+  E(tautomeric) = 0.5162 eV
+
+  Tautomeric energy (relative) = 0.5321 eV
+
+Searching for saddle point...
+  Saddle point at d1 = 1.8298, d2 = 1.3419 Å
+  E(saddle) = 0.5401 eV
+
+  Forward barrier  ΔV₁ = 0.5559 eV
+  Reverse barrier  ΔV₂ = 0.0239 eV
+  Asymmetry        ΔE  = 0.5321 eV
+
+Finding minimum energy path (MEP)...
+  MEP forward barrier  = 0.5559 eV
+  MEP reverse barrier  = 0.0238 eV
+  MEP arc length       = 1.3556 Å
+  TS on MEP at d1 = 1.826, d2 = 1.349 Å
+
+  MEP: using saddle-point barrier: 0.5559 eV
+
+Saved: 2d_pes_grid//2d_mep_analysis.png
+
+Searching for forward MAP (24 free nodes)...
+    SCF iteration 0: ΔV(forward) guess = 0.7339 eV (from straight-line path)
+    SCF iteration 1: ΔV(forward) = 0.5575 eV (Δ = 1.76e-01 eV, init: curve_neg)
+    SCF iteration 2: ΔV(forward) = 0.5687 eV (Δ = 1.12e-02 eV, init: curve_neg)
+    SCF iteration 3: ΔV(forward) = 0.5690 eV (Δ = 3.14e-04 eV, init: curve_neg)
+    SCF iteration 4: ΔV(forward) = 0.5691 eV (Δ = 7.45e-05 eV, init: curve_neg)
+    SCF converged in 4 iterations
+  Forward MAP:
+    ΔV₁(MAP_f) = 0.5691 eV
+    ΔV₂ seen by forward path = 0.0370 eV
+    Path curvature: -0.1918 Å
+    Best initialisation: curve_neg
+
+Searching for reverse MAP (24 free nodes)...
+    SCF iteration 0: ΔV(reverse) guess = 0.2019 eV (from straight-line path)
+    SCF iteration 1: ΔV(reverse) = 0.0677 eV (Δ = 1.34e-01 eV, init: straight)
+    SCF iteration 2: ΔV(reverse) = 0.0239 eV (Δ = 4.38e-02 eV, init: mep)
+    SCF iteration 3: ΔV(reverse) = 0.0239 eV (Δ = 2.26e-06 eV, init: mep)
+    SCF converged in 3 iterations
+  Reverse MAP:
+    ΔV₂(MAP_r) = 0.0239 eV
+    ΔV₁ seen by reverse path = 0.5560 eV
+    Path curvature: -0.3732 Å
+    Best initialisation: mep
+
+  Mean path separation (MAP_f vs MAP_r): 0.0810 Å
+  -> Forward and reverse MAP paths differ
+
+Computing WKB κ (MEP, forward) at T = 298.1 K...
+  κ_MEP(forward) = 2.2251
+
+Computing WKB κ (MEP, reverse) at T = 298.1 K...
+  κ_MEP(reverse) = 1.4730
+
+Computing WKB κ_f (MAP forward) at T = 298.1 K...
+    Dispatching 300 energy points across 8 workers...
+    All 300 energy points complete.
+  κ_MAP(forward) = 3.7883
+
+Computing WKB κ_r (MAP reverse) at T = 298.1 K...
+    Dispatching 300 energy points across 8 workers...
+    All 300 energy points complete.
+  κ_MAP(reverse) = 1.4845
+
+============================================================
+  Results at T = 298.15 K
+============================================================
+
+  [MEP]  (barriers: ΔV₁ = 0.5559, ΔV₂ = 0.0239 eV)
+    κ_f       = 2.2251
+    κ_r       = 1.4730
+    k_f       = 5.5397e+03 s⁻¹
+    k_r       = 3.6141e+12 s⁻¹
+    τ_f       = 1.8052e-04 s
+    τ_r       = 2.7669e-13 s
+
+  [MAP forward]  (barrier: ΔV₁ = 0.5691 eV)
+    κ_f       = 3.7883
+    k_f       = 5.6567e+03 s⁻¹
+    τ_f       = 1.7678e-04 s
+
+  [MAP reverse]  (barrier: ΔV₂ = 0.0239 eV)
+    κ_r       = 1.4845
+    k_r       = 3.6372e+12 s⁻¹
+    τ_r       = 2.7493e-13 s
+Saved: 2d_pes_grid//2d_WKB_Tunnelling_forward.png
+Saved: 2d_pes_grid//2d_WKB_Tunnelling_reverse.png
+
+Computing action difference ΔS(E) = S_MEP - S_MAP...
+Saved: 2d_pes_grid//2d_action_difference_fwd.png
+Saved: 2d_pes_grid//2d_action_difference_rev.png
+
+Calculating rates over 200–400 K...
+  Dispatching 100 temperatures across 8 workers...
+  All 100 temperatures complete.
+Saved: 2d_pes_grid//2d_WKB_eyring_rates_fwd.png
+Saved: 2d_pes_grid//2d_WKB_eyring_rates_rev.png
+Saved: 2d_pes_grid//2d_mep_vs_MAP.png
+Saved: 2d_pes_grid//2d_energy_mep_vs_MAP.png
+Saved: 2d_pes_grid//2d_WKB_rates_vs_temperature.csv
+
+============================================================
+  SUMMARY
+============================================================
+  Canonical min at:  (1.033, 1.021) Å
+  Tautomeric min at: (1.899, 1.596) Å
+  Saddle point at:   (1.830, 1.342) Å
+
+  MEP barriers:
+    Forward barrier:   0.5559 eV
+    Reverse barrier:   0.0239 eV
+  MAP barriers:
+    Forward barrier (MAP_f): 0.5691 eV
+    Reverse barrier (MAP_r): 0.0239 eV
+  Asymmetry:         0.5321 eV
+  MAP nodes:   24
+  MAP fwd curvature: -0.1918 Å
+  MAP rev curvature: -0.3732 Å
+  Mean path separation: 0.0810 Å
+  MAP fwd SCF converged: True
+  MAP rev SCF converged: True
+
+  κ_MEP(fwd) at 298.1 K:    2.2251
+  κ_MEP(rev) at 298.1 K:    1.4730
+  κ_MAP(fwd) at 298.1 K:    3.7883
+  κ_MAP(rev) at 298.1 K:    1.4845
+
+  τ_f (MEP):         1.8052e-04 s
+  τ_r (MEP):         2.7669e-13 s
+  τ_f (MAP):   1.7678e-04 s
+  τ_r (MAP):   2.7493e-13 s
+
+  Parallelisation: 8 workers
+============================================================
+
+  If you used this script or found it helpful, please cite:
+  Authors, "Your Paper Title",
+  Manuscript in preparation (2026).
+
